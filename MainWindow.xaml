@@ -1,0 +1,197 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Proiect_DucaAndreea"
+        xmlns:Model="clr-namespace:Model;assembly=Model" x:Class="Proiect_DucaAndreea.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="utilizatorViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Utilizator}, CreateList=True}"/>
+        <CollectionViewSource x:Key="serviciiViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Servicii}, CreateList=True}"/>
+        <CollectionViewSource x:Key="programariViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Programari}, CreateList=True}"/>
+        <CollectionViewSource x:Key="fidelitateViewSource" d:DesignSource="{d:DesignInstance {x:Type Model:Fidelitate}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid>
+        <TabControl x:Name="tbCtrlEntities" HorizontalAlignment="Left" Height="399" VerticalAlignment="Top" Width="647" Margin="135,10,0,0" SelectionChanged="TabControl_SelectionChanged">
+            <TabItem x:Name="tbItemUtilizatori" Header="Utilizatori" >
+                <Grid Background="LightPink" DataContext="{StaticResource utilizatorViewSource}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="81*"/>
+                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="542*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="utilizatorDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="31,23,32,238" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False" Grid.ColumnSpan="3" RenderTransformOrigin="1.003,0.509">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="idColumn" Width="50" Header="Id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn x:Name="numeColumn" Width="150" Header="Nume" Binding="{Binding Nume}"/>
+                            <DataGridTextColumn x:Name="prenumeColumn" Width="150" Header="Prenume" Binding="{Binding Prenume}"/>
+                            <DataGridTextColumn x:Name="emailColumn" Width="120" Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn x:Name="numarTelefonColumn" Width="70" Header="Numar Telefon" Binding="{Binding NumarTelefon}"/>
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                    <Label x:Name="lblDetaliiUtilizator" Content="Detalii utilizator" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="2" Margin="40.5,189,0,0" FontWeight="Bold"/>
+                    <Grid x:Name="gUtilizator" Grid.Column="1" HorizontalAlignment="Left" Margin="0,220,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Nume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbNume" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Nume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Prenume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbPrenume" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Prenume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Email:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbEmail" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Numar Telefon:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbTel" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="3" Text="{Binding NumarTelefon, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tbItemServicii" Header="Servicii">
+                <Grid Background="LightCoral" DataContext="{StaticResource serviciiViewSource}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="18*"/>
+                        <ColumnDefinition Width="735*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="serviciiDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,26,335,117" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="2" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="idColumn1" Binding="{Binding Id}" Header="Id" Width="30"/>
+                            <DataGridTextColumn x:Name="numeColumn1" Binding="{Binding Nume}" Header="Nume" Width="150"/>
+                            <DataGridTextColumn x:Name="pretColumn" Binding="{Binding Pret}" Header="Pret" Width="40"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid x:Name="gServicii" Grid.Column="3" HorizontalAlignment="Left" Margin="349,82,0,0" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Nume:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic"/>
+                        <TextBox x:Name="tbNumeServiciu" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Nume, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <Label Content="Pret:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold" FontStyle="Italic"/>
+                        <TextBox x:Name="tbPret" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Pret, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tbItemProgramari" Header="Programari">
+                <Grid Background="#FFE5E5B3" DataContext="{StaticResource programariViewSource}" Margin="0,0,7,0" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="143*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="401*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="programariDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,0,24,226" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="5">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="FirstName" Binding="{Binding Nume, Mode=OneWay}" Header="Nume" Width="100" CanUserResize="False"/>
+                            <DataGridTextColumn x:Name="LastName" Binding="{Binding Prenume, Mode=OneWay}" Header="Prenume" Width="100"/>
+                            <DataGridTextColumn x:Name="ProductName" Binding="{Binding productName, Mode=OneWay}" Header="Serviciu" Width="200"/>
+                            <DataGridTextColumn x:Name="Price" Binding="{Binding Pret, Mode=OneWay}" Header="Pret" Width="60"/>
+                            <DataGridTemplateColumn x:Name="dataProgramariiColumn" Header="Data Programarii" Width="140">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding DataProgramarii, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="GotFocus" Handler="DataGridCell_GotFocus"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                    </DataGrid>
+                    <Label Content="Utilizatori" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,170,0,0" FontWeight="Bold"/>
+                    <Label Content="Servicii" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,228,0,0" FontWeight="Bold"/>
+                    <Label Content="Data programarii" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,310,0,0" FontWeight="Bold"/>
+                    <ComboBox x:Name="cmbUserValues" HorizontalAlignment="Left" Margin="125,174,0,0" VerticalAlignment="Top" Width="176" SelectedItem="{Binding ElementName=programariDataGrid,Path=SelectedItem.UtilizatorId,Mode=OneWay}" Grid.ColumnSpan="5" RenderTransformOrigin="0.712,0.386">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Nume"/>
+                                            <Binding Path="Prenume"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox x:Name="cmbProductValues" HorizontalAlignment="Left" Margin="125,232,0,0" VerticalAlignment="Top" Width="176" SelectedValue="{Binding ElementName=programariDataGrid,Path=SelectedItem.Serviciu,Mode=OneWay}" Grid.ColumnSpan="5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1} RON">
+                                            <Binding Path="Nume"/>
+                                            <Binding Path="Pret"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <DatePicker x:Name="dpDate" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="5" Margin="137,312,0,0" Width="176"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="tbItemFidelitate" Header="Fidelitate" FontFamily="Goudy Old Style">
+                <Grid Background="Pink" DataContext="{StaticResource fidelitateViewSource}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="105*"/>
+                        <ColumnDefinition Width="27*"/>
+                        <ColumnDefinition Width="485*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="fidelitateDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,0,0,126" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.ColumnSpan="4">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="UserFirstName" Binding="{Binding Nume}" Header="Nume Utilizator" Width="150"/>
+                            <DataGridTextColumn x:Name="UserLastName" Binding="{Binding Prenume}" Header="Prenume" Width="150"/>
+                            <DataGridTextColumn x:Name="NrProgramari" Binding="{Binding NrProgramari}" Header="Nr Programari" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+        <Grid HorizontalAlignment="Left" Height="349" VerticalAlignment="Top" Width="130" Margin="0,60,0,0">
+            <GroupBox x:Name="gbOperations" Header="Operatii" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="124" Button.Click="gbOperations_Click">
+                <StackPanel x:Name="spOperations" HorizontalAlignment="Left" Margin="0,0,-4,0" Width="116" Height="78" VerticalAlignment="Top">
+                    <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click" Height="21"/>
+                    <Button x:Name="btnEdit" Content="Edit" Click="btnEdit_Click" Height="21"/>
+                    <Button x:Name="btnDelete" Content="Delete" Click="btnDelete_Click" Height="25"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="gbActions" Header="Actiuni" Margin="-6,165,6,39">
+                <StackPanel HorizontalAlignment="Left" Height="145" VerticalAlignment="Top" Width="120" Margin="0,0,-2,-7">
+                    <Button Content="Save" x:Name="btnSave" Click="btnSave_Click"/>
+                    <Button Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click"/>
+                </StackPanel>
+
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
